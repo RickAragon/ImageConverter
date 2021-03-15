@@ -18,12 +18,14 @@ namespace ConversorDeImagenes
         private static readonly string OUTPUT_DIR;
         private static int[] RES_PIPE = new int[]{100 , 100};
 
+        private static double Progreso = 0;
+
         static Program()
         {
             OUTPUT_DIR = $"{Directory.GetCurrentDirectory()}\\ImagenesTransformadas";
         }
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             copyright();
             if(args.Length < 1)
@@ -96,7 +98,7 @@ namespace ConversorDeImagenes
                 FileInfo fileInfo = new FileInfo(path);
                 try
                 {
-                    await ic.ConvertImage(fileInfo, paths.Count);
+                    ic.ConvertImage(fileInfo, paths.Count, ref Progreso);
                 } 
                 catch(Exception ex)
                 {
