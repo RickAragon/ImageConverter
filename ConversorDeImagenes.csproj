@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net5</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.Net-Q8-AnyCPU" Version="7.3.0" />
+    <PackageReference Include="Magick.Net-Q8-AnyCPU" Version="7.23.2.1" />
   </ItemGroup>
 
 </Project>
