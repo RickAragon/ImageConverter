@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using ImageMagick;
 
+using static ConversorDeImagenes.WriteToConsole;
+
 namespace ConversorDeImagenes
 {
     class Program
@@ -17,12 +19,14 @@ namespace ConversorDeImagenes
                 Pause();
                 return;
             }
+            
             Console.WriteLine("\tDesea ingresar una resolucion?"); 
             WriteClarification("* Los formatos de resolucion aceptados son: 100x100, 100:100, 100 100, 100/100");
             WriteClarification("\t[Los números presentados anteriormente son solo ejemplos, \n\t\tse pueden utilizar otras denominaciones]");
             WriteClarification("* La relación de aspecto se mantedrá por lo que la resolución final \n\t\tpuede ser solamente una aproximación a lo ingresado");
             WriteClarification("(deje el campo vacío y presione enter para la resolución original por defecto)");
             Console.Write("\t");
+
             string resolution = Console.ReadLine();
             bool resFlag = true;
             int[] resPipe = new int[2];
@@ -33,10 +37,12 @@ namespace ConversorDeImagenes
             ConsoleKeyInfo clave = Console.ReadKey();
             Console.Clear();
             copyright();
+
             if(clave.Key == ConsoleKey.S)
             {
                 basear64 = true;
             }
+
             if(String.IsNullOrEmpty(resolution) || String.IsNullOrWhiteSpace(resolution))
             {
                 resFlag = false;
@@ -162,70 +168,6 @@ namespace ConversorDeImagenes
             Console.WriteLine();
             WriteMessage("Éxito!");
             Pause();
-        }
-
-        static void WriteClarification(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine($"\t{message}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        static void WriteLog(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"\t{message}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        static void WriteMessage(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\t{message}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        static void WriteWarn(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"\t{message}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        static void WriteError(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\t{message}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        static void WritePercentage(double percentage)
-        {
-            if(percentage >= 100)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-            }
-            Console.Write($"\r\tCompletado: {percentage}%");
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-        static void Pause()
-        {
-            Console.WriteLine("\tPresione una tecla para continuar . . .");
-            Console.ReadKey(true);
-        }
-
-        static void copyright()
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine($"\t\t\t<< Compresor de imágenes >>");
-            Console.WriteLine($"\t\t\t© Ricardo José Guevara Aragón");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("\n");
         }
     }
 }
